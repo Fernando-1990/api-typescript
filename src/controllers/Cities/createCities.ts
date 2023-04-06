@@ -4,13 +4,13 @@ import { Request, Response } from 'express';
 interface ICity {
     nome: string;
 }
+export class City {
+    create(req:Request<{}, {}, ICity>, res:Response) {
+        const data = req.body;
 
-export const create = (req: Request<{}, {}, ICity>, res: Response) => {
+        console.log(data);
 
-    const data = req.body;
+        return res.json(data);
 
-    console.log(data);
-
-
-    return res.send({message:'Create'});
-};
+    } 
+}
