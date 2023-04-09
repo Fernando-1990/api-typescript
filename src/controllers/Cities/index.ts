@@ -1,4 +1,8 @@
 import * as create from './createCities';
+import * as getAll from './getAll';
 
 
-export const CitiesController = new create.City;
+
+export const CitiesController = {
+    ...create, ...getAll,
+};

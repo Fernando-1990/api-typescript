@@ -10,7 +10,7 @@ export class Server {
         app.use(router);
 
         app.listen(process.env.PORT, () => {
-            console.log('Server: online');
+            console.log(`Server: online through port: ${process.env.PORT}`);
         });
     }
 }
