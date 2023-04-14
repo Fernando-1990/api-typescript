@@ -11,7 +11,6 @@ interface ICity {
 export const createValidation = validation((getSchema) => ({
     body: getSchema<ICity>(yup.object().shape({
         nome: yup.string().required().min(3),
-        estado: yup.string().required().min(3),
     }))
 }));
 

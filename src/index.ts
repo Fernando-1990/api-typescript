@@ -1,4 +1,7 @@
-import { Server } from './server/server';
+import 'dotenv/config';
+import { app } from './server/server';
 
 
-Server.init();
+app.listen(process.env.PORT, () => {
+    console.log(`Server: online through port: ${process.env.PORT}`);
+});
