@@ -2,15 +2,15 @@ import { Request, Response } from 'express';
 import * as yup from 'yup';
 import { validation } from '../../shared/middlewares';
 import { StatusCodes } from 'http-status-codes';
+import { ICity } from '../../database/models';
+import { CitiesProvider } from '../../database/providers/cities';
 
 
 interface IParamProps {
   id?: number;
 }
 
-interface IBodyProps {
-  nome: string;
-}
+type IBodyProps = Omit<ICity, 'id'>
 
 export const updateByIdValidation = validation((getSchema) => ({
     body: getSchema<IBodyProps>(yup.object().shape({
@@ -22,9 +22,23 @@ export const updateByIdValidation = validation((getSchema) => ({
 }));
 
 export const updateById = async (req: Request<IParamProps, IBodyProps>, res: Response) => {
-    console.log(req.body);
-    console.log(req.params);
+    if (!req.params.id) {
+        return res.status(StatusCodes.BAD_REQUEST).json({
+            
+            errors: {
+                default: 'id param must be informed.'
+            }
+        });
+    }
 
+    const result = await CitiesProvider.updateById(req.params.id, req.body);
+    if (result instanceof Error) {
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            errors: {
+                default: result.message
+            }
+        });
+    }
 
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Não implementado');
+    return res.status(StatusCodes.NO_CONTENT).json(result);
 };

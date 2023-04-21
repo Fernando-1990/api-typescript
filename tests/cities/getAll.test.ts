@@ -1,8 +1,9 @@
 import { StatusCodes } from 'http-status-codes';
+
 import { testServer } from '../jest.setup';
 
 
-describe('Cidades - GetAll', () => {
+describe('Cities - GetAll', () => {
 
     it('Buscar todos os registros', async () => {
 
@@ -13,7 +14,7 @@ describe('Cidades - GetAll', () => {
         expect(res1.statusCode).toEqual(StatusCodes.CREATED);
 
         const resBuscada = await testServer
-            .get('/cidades')
+            .get('/cities')
             .send();
 
         expect(Number(resBuscada.header['x-total-count'])).toBeGreaterThan(0);
