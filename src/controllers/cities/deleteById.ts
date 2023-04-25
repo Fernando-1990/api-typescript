@@ -13,7 +13,6 @@ export const deletetByIdValidation = validation((getSchema) => ({
 }));
   
 export const deleteById = async (req: Request<IParamProps>, res: Response) => {
-    console.log('AQUIII', req.params.id);
     if (!req.params.id) {
         return res.status(StatusCodes.BAD_REQUEST).json({            
             errors: {
@@ -22,7 +21,6 @@ export const deleteById = async (req: Request<IParamProps>, res: Response) => {
         });
     }
     const result = await CitiesProvider.deleteById(req.params.id);
-    console.log('RESULT2', result);
     if (result instanceof Error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             errors: {

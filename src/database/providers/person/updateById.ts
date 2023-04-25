@@ -3,7 +3,7 @@ import { Knex } from '../../knex';
 import { IPerson } from '../../models';
 
 
-export const create = async (person: Omit<IPerson, 'id'>): Promise<number | Error> => {
+export const updateById = async (id: number, person: Omit<IPerson, 'id'>): Promise<void | Error> => {
     try {
         const [{ count }] = await Knex(ETableNames.person)
             .where('id', '=', person.cidadeId)
@@ -12,21 +12,15 @@ export const create = async (person: Omit<IPerson, 'id'>): Promise<number | Erro
         if (count === 0) {
             return new Error('city not found');
         }
+        
+        const result = await Knex(ETableNames.person)
+            .update(person)
+            .where('id', '=', id);
+        if (result > 0) return;
 
-        const [result] = await Knex(ETableNames.person).insert(person).returning('id');
-
-        if(typeof result === 'object') {
-            return result.id;
-        } else if (typeof result === 'number') {
-            return result;
-        }
-
-
-        return new Error('Error registering');
-
+        return new Error('Error to upadate register');
     } catch (error) {
         console.log(error);
-        return Error('Error registering');
-
+        return new Error('Error to update register');
     }
 };
