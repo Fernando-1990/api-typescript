@@ -6,12 +6,12 @@ export const seed = async (knex: Knex) => {
     const [{ count }] = await knex(ETableNames.city).count<[{count: number}]>('* as count');
     if (!Number.isInteger(count) || Number(count) > 0) return;
 
-    const citiesToInsert = await SaoPauloCities.map(cities => ({nome: cities}));
+    const citiesToInsert = await AcreCities.map(cities => ({nome: cities}));
     await knex(ETableNames.city).insert(citiesToInsert);
 };
 
 
-const SaoPauloCities = [
+const AcreCities = [
     'Acrelândia',
     'Assis Brasil',
     'Brasiléia',

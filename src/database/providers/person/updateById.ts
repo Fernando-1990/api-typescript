@@ -5,7 +5,7 @@ import { IPerson } from '../../models';
 
 export const updateById = async (id: number, person: Omit<IPerson, 'id'>): Promise<void | Error> => {
     try {
-        const [{ count }] = await Knex(ETableNames.person)
+        const [{ count }] = await Knex(ETableNames.city)
             .where('id', '=', person.cidadeId)
             .count<[{ count: number }]>('* as count');
 
