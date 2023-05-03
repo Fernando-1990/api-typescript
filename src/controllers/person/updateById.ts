@@ -2,14 +2,10 @@ import { Request, Response } from 'express';
 import * as yup from 'yup';
 import { validation } from '../../shared/middlewares';
 import { StatusCodes } from 'http-status-codes';
-import { ICity, IPerson } from '../../database/models';
-import { CitiesProvider } from '../../database/providers/cities';
+import { IPerson } from '../../database/models';
 import { personProvider } from '../../database/providers/person';
+import { IParamProps } from '../../shared/types';
 
-
-interface IParamProps {
-  id?: number;
-}
 
 type IBodyProps = Omit<IPerson, 'id'>
 

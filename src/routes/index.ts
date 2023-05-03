@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { CitiesController, personController } from '../controllers';
+import { CitiesController, personController, userController } from '../controllers';
 
 
 const router = Router();
@@ -20,6 +20,9 @@ router.post('/person', personController.createValidation, personController.creat
 router.get('/person/:id', personController.getByIdValidation, personController.getById);
 router.put('/person/:id', personController.updateByIdValidation, personController.updateById);
 router.delete('/person/:id', personController.deletetByIdValidation, personController.deleteById);
+
+router.post('/cadaster', userController.signUpValidation, userController.signUp);
+router.post('/login', userController.signInValidation , userController.signIn);
 
 router.all('*', (_, res) => res.status(404).send());
 

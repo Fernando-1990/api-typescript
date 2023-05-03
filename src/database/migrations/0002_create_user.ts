@@ -8,8 +8,9 @@ export async function up(knex: Knex): Promise<void> {
         .createTable(ETableNames.user, table => {
             table.bigIncrements('id').primary().index();
             table.string('nome').notNullable().checkLength('>', 3);
+            table.string('sobrenome').notNullable().checkLength('>', 3);
             table.string('email').index().unique().notNullable().checkLength('>', 5);
-            table.string('senha').notNullable().checkLength('>', 6);
+            table.string('password').notNullable().checkLength('>', 6);
 
             table.comment('table used to store users.');
 

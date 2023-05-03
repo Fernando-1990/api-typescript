@@ -5,6 +5,6 @@ export interface IUser {
     email: string
     nome: string
     sobrenome: string
-    senha: string
+    password: string
 
 }

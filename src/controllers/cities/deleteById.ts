@@ -3,7 +3,7 @@ import * as yup from 'yup';
 import { validation } from '../../shared/middlewares';
 import { StatusCodes } from 'http-status-codes';
 import { CitiesProvider } from '../../database/providers/cities';
-import { IParamProps } from './getById';
+import { IParamProps } from '../../shared/types';
 
   
 export const deletetByIdValidation = validation((getSchema) => ({

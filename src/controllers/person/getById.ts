@@ -3,10 +3,8 @@ import * as yup from 'yup';
 import { validation } from '../../shared/middlewares';
 import { StatusCodes } from 'http-status-codes';
 import { personProvider } from '../../database/providers/person';
+import { IParamProps } from '../../shared/types';
 
-export interface IParamProps {
-  id?: number;
-}
 
 export const getByIdValidation = validation((getSchema) => ({
     params: getSchema<IParamProps>(yup.object().shape({

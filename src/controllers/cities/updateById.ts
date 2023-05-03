@@ -4,11 +4,8 @@ import { validation } from '../../shared/middlewares';
 import { StatusCodes } from 'http-status-codes';
 import { ICity } from '../../database/models';
 import { CitiesProvider } from '../../database/providers/cities';
+import { IParamProps } from '../../shared/types';
 
-
-interface IParamProps {
-  id?: number;
-}
 
 type IBodyProps = Omit<ICity, 'id'>
 
