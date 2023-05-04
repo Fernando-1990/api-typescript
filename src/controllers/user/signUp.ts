@@ -11,7 +11,7 @@ type IBodyProps = Omit<IUser, 'id'>
 export const signUpValidation = validation((getSchema) => ({
     body: getSchema<IBodyProps>(yup.object().shape({
         email: yup.string().email().required().min(5),
-        nome: yup.string().required().min(2),
+        nome: yup.string().required().min(3),
         sobrenome: yup.string().required().min(2),
         password: yup.string().required().min(3),
     }))
