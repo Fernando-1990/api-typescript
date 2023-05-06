@@ -4,6 +4,7 @@ import { validation } from '../../shared/middlewares';
 import { StatusCodes } from 'http-status-codes';
 import { IUser } from '../../database/models';
 import { userProvider } from '../../database/providers/user';
+import { passwordCrypto } from '../../services';
 
 
 type IBodyProps = Omit<IUser, 'id' | 'nome' | 'sobrenome'>
@@ -27,8 +28,8 @@ export const signIn = async (req: Request<{}, {}, IBodyProps>, res: Response) =>
             }
         });
     }
-    
-    if (password !== result.password) {
+    const passwordMatch = await passwordCrypto.verifyPassword(password, result.password);
+    if (!passwordMatch) {
         return res.status(StatusCodes.UNAUTHORIZED).json({
             errors: {
                 default: 'Email or password invalid'
