@@ -1,6 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
-
-import { testServer } from '../jest.setup';
+import { testServer, shared } from '../jest.setup';
 
 
 describe('Cities - GetAll', () => {
@@ -9,12 +8,14 @@ describe('Cities - GetAll', () => {
 
         const res1 = await testServer
             .post('/cities')
+            .set({Authorization: `Bearer ${shared.accessToken}`})
             .send({ nome: 'Caxias do sul' });
 
         expect(res1.statusCode).toEqual(StatusCodes.CREATED);
 
         const resBuscada = await testServer
             .get('/cities')
+            .set({Authorization: `Bearer ${shared.accessToken}`})
             .send();
 
         expect(Number(resBuscada.header['x-total-count'])).toBeGreaterThan(0);

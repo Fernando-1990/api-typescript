@@ -1,5 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
-import { testServer } from '../jest.setup';
+import { testServer, shared } from '../jest.setup';
 
 
 describe('Pessoas - DeleteById', () => {
@@ -8,6 +8,7 @@ describe('Pessoas - DeleteById', () => {
 
         const res1 = await testServer
             .post('/person')
+            .set({Authorization: `Bearer ${shared.accessToken}`})
             .send({ email: 'exemple@gmail.com',
                 nome: 'Fernando',
                 sobrenome: 'Ferreira',
@@ -17,6 +18,7 @@ describe('Pessoas - DeleteById', () => {
 
         const resApagada = await testServer
             .delete(`/person/${res1.body}`)
+            .set({Authorization: `Bearer ${shared.accessToken}`})
             .send();
 
         expect(resApagada.statusCode).toEqual(StatusCodes.NO_CONTENT);
@@ -25,6 +27,7 @@ describe('Pessoas - DeleteById', () => {
 
         const res2 = await testServer
             .delete('/person/99999')
+            .set({Authorization: `Bearer ${shared.accessToken}`})
             .send();
 
         expect(res2.statusCode).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);

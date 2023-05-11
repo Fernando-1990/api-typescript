@@ -1,14 +1,16 @@
 import { StatusCodes } from 'http-status-codes';
-import { testServer } from '../jest.setup';
+import { testServer, shared } from '../jest.setup';
 
 
 
 describe('Cidades - Create', () => {
+          
 
     it('Cria registro', async () => {
   
         const res1 = await testServer
             .post('/cities')
+            .set({Authorization: `Bearer ${shared.accessToken}`})
             .send({ nome: 'São Paulo' });
   
         expect(res1.statusCode).toEqual(StatusCodes.CREATED);
@@ -18,6 +20,7 @@ describe('Cidades - Create', () => {
   
         const res1 = await testServer
             .post('/cities')
+            .set({Authorization: `Bearer ${shared.accessToken}`})
             .send({ nome: 'Ca' });
   
         expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST);

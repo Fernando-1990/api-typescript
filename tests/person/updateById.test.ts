@@ -1,6 +1,6 @@
 import { StatusCodes } from 'http-status-codes';
 
-import { testServer } from '../jest.setup';
+import { testServer, shared } from '../jest.setup';
 
 
 describe('Pessoas - UpdateById', () => {
@@ -9,6 +9,7 @@ describe('Pessoas - UpdateById', () => {
 
         const res1 = await testServer
             .post('/person')
+            .set({Authorization: `Bearer ${shared.accessToken}`})
             .send({ email: 'exemple@gmail.com',
                 nome: 'Fernando',
                 sobrenome: 'Ferreira',
@@ -18,6 +19,7 @@ describe('Pessoas - UpdateById', () => {
 
         const resAtualizada = await testServer
             .put(`/person/${res1.body}`)
+            .set({Authorization: `Bearer ${shared.accessToken}`})
             .send({ email: 'exemple@gmail.com',
                 nome: 'Felipe',
                 sobrenome: 'Ferreira',
@@ -29,6 +31,7 @@ describe('Pessoas - UpdateById', () => {
 
         const res1 = await testServer
             .put('/person/99999')
+            .set({Authorization: `Bearer ${shared.accessToken}`})
             .send({ email: 'exemple@gmail.com',
                 nome: 'Felipe',
                 sobrenome: 'Ferreira',
