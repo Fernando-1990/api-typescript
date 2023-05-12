@@ -29,7 +29,7 @@ export const test: Knex.Config = {
     }
 };
 export const prod: Knex.Config = {
-    client: 'pq',
+    client: 'pg',
     migrations: {
         directory: path.resolve(__dirname, '..','migrations')
     },
